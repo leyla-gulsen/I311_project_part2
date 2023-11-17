@@ -299,15 +299,19 @@ public class CustomerHomeController implements Initializable {
 	 */
 	@FXML
 	private void onFillOrderButtonClick(ActionEvent event) {
-		if (displayedOrder != null) {
-			errorLabel.setVisible(false);
-			Order o = orders.get(orders.indexOf(displayedOrder));
-			o.setDateFilled(new Date());
-			orders.set(orders.indexOf(displayedOrder), o);
-			saveOrders();
-			displayOrder(o);
-		} else
-			errorLabel.setVisible(true);
+	    if (displayedOrder != null) {
+	        errorLabel.setVisible(false);
+	        Date currentDate = new Date();
+	        displayedOrder.setDateFilled(currentDate);
+	        int index = orders.indexOf(displayedOrder);
+	        if (index != -1) {
+	            orders.set(index, displayedOrder);
+	            saveOrders();
+	        }
+	        displayOrder(displayedOrder);
+	    } else {
+	        errorLabel.setVisible(true);
+	    }
 	}
 	
 	/**
