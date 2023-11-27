@@ -10,6 +10,7 @@ import java.util.Date;
  */
 public class Shipment {
 
+	private int shipnum;
 	private String size;
 	private String color;
 	private int quantity;
@@ -18,8 +19,9 @@ public class Shipment {
 	 * Constructs a new Thneed
 	 * @param size the size of the Thneed ("small", "medium", or "large")
 	 * @param color the color of the Thneed
+	 * Shipment class calls Thneed - hashmap pairs Thneed with quantity like a dictionary. Shipment class is similar to Order
 	 */
-	public Shipment(String size, String color, int quantity, Date shipdate) {
+	public Shipment(int shipnum, String size, String color, int quantity, Date shipdate) {
 		super();
 		this.size = size;
 		this.color = color;
@@ -28,6 +30,9 @@ public class Shipment {
 	}
 	
 	/** Getters **/
+	public int getOrderNumber() {
+		return orderNumber;
+	}
 
 	public String getSize() {
 		return size;
