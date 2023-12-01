@@ -24,6 +24,8 @@ public class InventoryViewController {
 	private TextField deliveryDateField;
 	@FXML
 	private Button generateReportButton;
+	@FXML
+	private ListView incomingShipmentListView;
 
 	// Event Listener on Button[#deliveryUpdateButton].onAction
 	@FXML

@@ -15,7 +15,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ListView fx:id="currentInventoryListView" layoutX="28.0" layoutY="109.0" prefHeight="376.0" prefWidth="213.0" />
+      <ListView fx:id="currentInventoryListView" layoutX="28.0" layoutY="109.0" prefHeight="155.0" prefWidth="213.0" />
       <Label layoutX="70.0" layoutY="76.0" text="Current Inventory">
          <font>
             <Font size="18.0" />
@@ -33,5 +33,11 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <Label layoutX="70.0" layoutY="277.0" text="Incoming Shipment">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ListView fx:id="incomingShipmentListView" layoutX="34.0" layoutY="311.0" prefHeight="155.0" prefWidth="213.0" />
    </children>
 </AnchorPane>
