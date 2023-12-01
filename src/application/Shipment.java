@@ -1,6 +1,7 @@
 package application;
 
 import java.util.Date;
+import java.util.HashMap;
 
 
 /**
@@ -11,9 +12,7 @@ import java.util.Date;
 public class Shipment {
 
 	private int shipnum;
-	private String size;
-	private String color;
-	private int quantity;
+	private HashMap<Thneed, Integer> shipmentList;
 	private Date shipdate;
 	/**
 	 * Constructs a new Thneed
@@ -21,29 +20,20 @@ public class Shipment {
 	 * @param color the color of the Thneed
 	 * Shipment class calls Thneed - hashmap pairs Thneed with quantity like a dictionary. Shipment class is similar to Order
 	 */
-	public Shipment(int shipnum, String size, String color, int quantity, Date shipdate) {
+	public Shipment(int shipnum, HashMap<Thneed, Integer> shipmentList, Date shipdate) {
 		super();
-		this.size = size;
-		this.color = color;
-		this.quantity = quantity;
-		this.shipdate = shipdate;
+		this.shipnum = shipnum;
+		this.shipmentList = shipmentList;
+		this.shipdate = new Date();
 	}
 	
 	/** Getters **/
-	public int getOrderNumber() {
-		return orderNumber;
-	}
-
-	public String getSize() {
-		return size;
+	public int getShipnum() {
+		return shipnum;
 	}
 	
-	public String getColor() {
-		return color;
-	}
-	
-	public int getQuantity() {
-		return quantity;
+	public HashMap<Thneed, Integer> getShipmentList() {
+		return shipmentList;
 	}
 	
 	public Date getShipdate() {
