@@ -33,6 +33,7 @@ public class Order implements Serializable {
 		this.thneedList = thneedList;
 		this.customer = customer;
 		this.dateOrdered = new Date();
+		this.dateProjected = new Date();
 	}
 	
 	/** Getters and Setters **/
@@ -63,6 +64,14 @@ public class Order implements Serializable {
 	
 	public void setDateFilled(Date dateFilled) {
 		this.dateFilled = dateFilled;
+	}
+	
+	public Date getDateProjected() {
+		return dateProjected;
+	}
+	
+	public void setDateProjected(Date dateProjected) {
+		this.dateProjected = dateProjected;
 	}
 	
 	/**
