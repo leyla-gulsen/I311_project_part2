@@ -1,5 +1,11 @@
 package application;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,13 +18,28 @@ public class Inventory {
         this.currentInventory = new HashMap<>();
         this.scheduledReplacements = new HashMap<>();
     }
+    
 
-    public void updateInventory(String itemName, int quantity) {
-        currentInventory.put(itemName, quantity);
+    // Method to update inventory based on a shipment
+    public void updateInventory(Shipment shipment) {
+        int shipNum = shipment.getShipnum();
+        Date shipDate = shipment.getShipdate();
+        HashMap<Thneed, Integer> shipmentList = shipment.getShipmentList();
 
-        if (scheduledReplacements.containsKey(itemName)) {
-            System.out.println("Item on backorder: " + itemName);
-            System.out.println("Estimated replacement date: " + scheduledReplacements.get(itemName));
+        System.out.println("Updating inventory for shipment #" + shipNum + " received on " + shipDate);
+
+        for (Map.Entry<Thneed, Integer> entry : shipmentList.entrySet()) {
+            Thneed thneed = entry.getKey();
+            int quantity = entry.getValue();
+
+            // Update current inventory with the new quantity
+            currentInventory.put(thneed.getSize() + "-" + thneed.getColor(), quantity);
+
+            // Check if there's a scheduled replacement for the item
+            if (scheduledReplacements.containsKey(thneed.getSize() + "-" + thneed.getColor())) {
+                System.out.println("Item on backorder: " + thneed.getSize() + "-" + thneed.getColor());
+                System.out.println("Estimated replacement date: " + scheduledReplacements.get(thneed.getSize() + "-" + thneed.getColor()));
+            }
         }
     }
 
