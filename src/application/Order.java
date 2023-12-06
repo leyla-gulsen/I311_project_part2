@@ -16,7 +16,6 @@ public class Order implements Serializable {
 	private Customer customer;
 	private Date dateOrdered;
 	private Date dateFilled;
-	private Date projectedFillDate;
 	
 //	added
 	private Date dateProjected;
@@ -34,7 +33,7 @@ public class Order implements Serializable {
 		this.thneedList = thneedList;
 		this.customer = customer;
 		this.dateOrdered = new Date();
-		this.projectedFillDate = calculateProjectedFillDate();
+		this.dateProjected = new Date();
 	}
 	
 	/** Getters and Setters **/
@@ -67,24 +66,12 @@ public class Order implements Serializable {
 		this.dateFilled = dateFilled;
 	}
 	
-	/*
-	 * calculate projected fill date based on system time
-	 * returns project fill date
-	 */
-	
-    private Date calculateProjectedFillDate() {
-    	// each order will be filled in 1 week
-        long currentTime = System.currentTimeMillis();
-        long projectedTime = currentTime + (7 * 24 * 60 * 60 * 1000); // adding 7 days in milliseconds
-        return new Date(projectedTime);
-    }
-	
-	public Date getProjectedFilDate() {
-		return projectedFillDate;
+	public Date getDateProjected() {
+		return dateProjected;
 	}
 	
-	public void setProjectedFillDate(Date projectedFillDate) {
-		this.projectedFillDate = projectedFillDate;
+	public void setDateProjected(Date dateProjected) {
+		this.dateProjected = dateProjected;
 	}
 	
 	/**
