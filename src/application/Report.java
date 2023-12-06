@@ -78,3 +78,7 @@ public class Report {
 		
 	}
 }
+
+/*
+ * update generateReportButtonClick in InventoryViewController to call mostPopularThneed and generating reports
+ */
