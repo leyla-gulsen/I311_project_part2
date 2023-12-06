@@ -18,6 +18,10 @@ public class Order implements Serializable {
 	private Date dateFilled;
 	private Date projectedFillDate;
 	
+//	added
+	private Date dateProjected;
+	
+	
 	/**
 	 * Construct a new Order
 	 * @param orderNumber a unique order ID
