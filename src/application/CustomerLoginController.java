@@ -165,6 +165,7 @@ public class CustomerLoginController implements Initializable {
 	/**
 	 * Loads customers from a customer data file
 	 */
+	@SuppressWarnings("unchecked")
 	private void loadCustomers() {
 		File file = new File(CUSTOMERS_FILEPATH);
 		try {
@@ -226,6 +227,7 @@ public class CustomerLoginController implements Initializable {
 			Scene dialogScene = new Scene(dialogRoot);
 			Stage dialogStage = new Stage();
 			dialogStage.setScene(dialogScene);
+			@SuppressWarnings("unused")
 			InventoryViewController dialogController = (InventoryViewController) loader.getController();
 			dialogStage.show();
 			System.out.println("After dialogStage.show()");
