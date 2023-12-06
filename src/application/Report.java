@@ -1,5 +1,9 @@
 package application;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /*
  * Report class
  * The program should also include a feature to generate reports that 
@@ -15,41 +19,59 @@ public class Report {
 		
 	}
 	
-	public void popularReport(List<order> orders) {
-		
-	}
+	/*
+	 * Most Popular Thneed
+	 */
+	
+	private String mostPopularThneed;
+	
+	public void popularReport(List<Order> orders) {
+        HashMap<String, Integer> thneedOccurrences = new HashMap<>();
+
+        // iterate through each order and count thneed occurrences
+        for (Order order : orders) {
+            for (Map.Entry<Thneed, Integer> entry : order.getThneedList().entrySet()) {
+                Thneed thneed = entry.getKey();
+                String thneedType = thneed.getSize() + " " + thneed.getColor() + " thneed";
+
+                // increment
+                thneedOccurrences.put(thneedType, thneedOccurrences.getOrDefault(thneedType, 0) + entry.getValue());
+            }
+        }
+
+        // find the most popular thneed type
+        String mostPopularThneed = null;
+        int maxOccurrences = 0;
+
+        for (Map.Entry<String, Integer> entry : thneedOccurrences.entrySet()) {
+            if (entry.getValue() > maxOccurrences) {
+                mostPopularThneed = entry.getKey();
+                maxOccurrences = entry.getValue();
+            }
+        }
+
+        // display the most popular thneed type
+        if (mostPopularThneed != null) {
+            this.mostPopularThneed = mostPopularThneed;
+        } else {
+            this.mostPopularThneed = "No orders placed yet.";
+        }
+    }
+	
+    public String getMostPopularThneed() {
+        return mostPopularThneed;
+    }
+    
+    /*
+     * 
+     */
 	
 	public void leastPopularReport(List<order> orders) {
 		
 	}
 	
 	public void topCustomerReport() {
-	    if (!orders.isEmpty()) {
-	        Customer topCustomer = null;
-	        int maxOrders = 0;
 
-	        for (int i = 0; i < orders.size(); i++) {
-	            int orderCount = 0;
-	            Customer currentCustomer = orders.get(i).getCustomer();
-
-	            for (int j = 0; j < orders.size(); j++) {
-	                if (orders.get(j).getCustomer().equals(currentCustomer)) {
-	                    orderCount++;
-	                }
-	            }
-
-	            if (orderCount > maxOrders) {
-	                maxOrders = orderCount;
-	                topCustomer = currentCustomer;
-	            }
-	        }
-
-	        if (topCustomer != null) {
-	            topCustomerField.setText(topCustomer.getName());
-	        } else {
-	            topCustomerField.setText("No orders placed yet.");
-	        }
-	    }
 	}
 	
 	public void backorderedItemsReport(List<order> orders) {
