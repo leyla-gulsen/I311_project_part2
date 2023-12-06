@@ -1,6 +1,7 @@
 package application;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * A Thneed represents a single product to be ordered in the Thneed order system.
@@ -34,4 +35,17 @@ public class Thneed implements Serializable {
 	public String getColor() {
 		return color;
 	}
+	
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Thneed thneed = (Thneed) obj;
+        return Objects.equals(size, thneed.size) && Objects.equals(color, thneed.color);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(size, color);
+    }
 }
