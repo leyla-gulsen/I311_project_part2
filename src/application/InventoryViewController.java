@@ -120,8 +120,6 @@ public class InventoryViewController {
 			e.printStackTrace();
 		}
 	}
-	
-
 
     // Event handler for the "Update Delivery" button
     @FXML
