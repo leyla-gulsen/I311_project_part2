@@ -1,6 +1,8 @@
 package application;
 
 import java.io.BufferedReader;
+
+import java.util.Calendar;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -150,6 +152,10 @@ public class CustomerHomeController implements Initializable {
 	 * @param o the order to be displayed
 	 */
 	private void displayOrder(Order o) {
+//		I got this calendar code from javatutorialspoint
+		Calendar calendar = Calendar.getInstance();
+	    calendar.add(Calendar.WEEK_OF_YEAR, 2);
+	    System.out.println("Updated Date = " + calendar.getTime());
 		String s = String.format("\n\nOrder #%03d\n\n", o.getOrderNumber());
 		displayedCustomerLabel.setText("Customer: " + o.getCustomer().getName());
 		displayedCustomerLabel.setVisible(true);
@@ -159,7 +165,7 @@ public class CustomerHomeController implements Initializable {
 		}
 		s += "\nOrdered: " + o.getDateOrdered() + "\n";
 		if (o.getDateFilled() == null)
-			s += "Status: Not filled\n";
+			s += "Status: Not filled\n Projected fill date: " + calendar.getTime();
 		else
 			s += "Status: Filled on " + o.getDateFilled();
 		orderDisplayArea.setText(s);
