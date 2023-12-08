@@ -2,6 +2,7 @@ package application;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 
 /**
@@ -40,4 +41,16 @@ public class Shipment {
 		return shipdate;
 	}
 	
+	@Override
+	public String toString() {
+	    StringBuilder sb = new StringBuilder();
+	    sb.append("Shipment #").append(shipnum).append(" - Date: ").append(shipdate).append("\n");
+
+	    for (Entry<Thneed, Integer> entry : shipmentList.entrySet()) {
+	        sb.append(entry.getKey().getSize()).append("-").append(entry.getKey().getColor())
+	          .append(": ").append(entry.getValue()).append(" items\n");
+	    }
+
+	    return sb.toString();
+	}
 }
