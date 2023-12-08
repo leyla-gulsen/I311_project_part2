@@ -165,7 +165,7 @@ public class CustomerHomeController implements Initializable {
 		}
 		s += "\nOrdered: " + o.getDateOrdered() + "\n";
 		if (o.getDateFilled() == null)
-			s += "Status: Not filled\n Projected fill date: " + calendar.getTime();
+			s += "Status: Not filled\nProjected fill date: " + calendar.getTime();
 		else
 			s += "Status: Filled on " + o.getDateFilled();
 		orderDisplayArea.setText(s);
