@@ -11,8 +11,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -77,15 +80,41 @@ public class ShipmentController {
 
     @FXML
     private ToggleGroup colorGroup;
+    
+    
+    private InventoryViewController inventoryViewController;
+    
+    public void setInventoryController(InventoryViewController inventoryViewController) {
+        this.inventory = inventoryViewController.getInventory();
+        this.inventoryViewController = inventoryViewController;
+    }
+
+
 
     @FXML
     private void onConfirmButtonClick(ActionEvent event) {
-    	
+        writeOrderListToFile("Shipment.txt");
+        
+        inventoryViewController.updateIncomingShipmentTextArea();
+
+        Stage stage = (Stage) confirmButton.getScene().getWindow();
+        stage.close();
+    }
+    
+    private void writeOrderListToFile(String fileName) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
+            for (String orderInfo : orderList.getItems()) {
+                writer.write(orderInfo);
+                writer.newLine(); 
+            }
+            System.out.println("Data written to " + fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void onCancelButtonClick(ActionEvent event) {
-        // Implement any logic needed when cancel button is clicked
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
@@ -109,18 +138,25 @@ public class ShipmentController {
             // Create a new shipment
             HashMap<Thneed, Integer> shipmentItem = new HashMap<>();
             shipmentItem.put(thneed, shipmentQuantity);
-            Shipment shipment = new Shipment(inventory.getNextShipnum(), shipmentItem, new Date());
+            
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.WEEK_OF_YEAR, 2);
+            Date deliveryDate = calendar.getTime();
+            
+            Shipment shipment = new Shipment(inventory.getNextShipnum(), shipmentItem, deliveryDate);
 
             // Add the shipment to the list
             shipmentList.add(shipment);
 
-            // Add logic to update the order list with color, size, and quantity
-            String orderInfo = thneed.getSize() + " " + thneed.getColor() + " Thneed  (" + shipmentQuantity + ")";
+            String orderInfo = thneed.getSize() + " " + thneed.getColor() + " Thneed  (" + shipmentQuantity + ") - Est. Delivery Date: " + deliveryDate;
             orderList.getItems().add(orderInfo);
-
 
             // Clear the quantity field
             quantityField.clear();
+            
+            System.out.println("Adding shipment. Calling updateIncomingShipmentTextArea...");
+            inventoryViewController.displayShipmentDataFromFile("Shipment.txt");
+
         }
     }
 
@@ -156,9 +192,5 @@ public class ShipmentController {
         return new Thneed("defaultSize", "defaultColor");
     }
 
-    public void setInventoryController(InventoryViewController inventoryViewController) {
-        // TODO: You may need to set values or perform actions based on the inventory controller
-        this.inventory = inventoryViewController.getInventory();
-    }
 
 }

@@ -10,9 +10,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
 
@@ -48,23 +51,77 @@ public class InventoryViewController implements Initializable {
         this.inventory = new Inventory();
         this.inventory.initialize();
         inventory.loadInventory();
+        displayShipmentDataFromFile("Shipment.txt");
         updateIncomingShipmentTextArea();
         updateCurrentInventoryTextArea();
+
+    }
+    
+    public void displayShipmentDataFromFile(String fileName) {
+        updateIncomingShipmentTextArea();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            incomingShipmentTextArea.clear();
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                incomingShipmentTextArea.appendText(line + "\n");
+            }
+            System.out.println("Shipment data loaded from " + fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error reading file: " + e.getMessage());
+        }
     }
 
     private void updateCurrentInventoryTextArea() {
         currentInventoryTextArea.clear();
 
-        for (Entry<Thneed, Integer> entry : inventory.getCurrentInventory().entrySet()) {
-            String itemInfo = entry.getKey().getSize() + "-" + entry.getKey().getColor() +
-                    ": " + entry.getValue() + " items\n";
-            currentInventoryTextArea.appendText(itemInfo);
+        try (BufferedReader reader = new BufferedReader(new FileReader("Shipment.txt"))) {
+            Map<String, Map<String, Integer>> inventoryByCategory = new HashMap<>();
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Split the line into parts based on the format
+                String[] parts = line.split(" - Est. Delivery Date: ");
+
+                // Check if the line has the expected format
+                if (parts.length == 2) {
+                    String thneedInfo = parts[0].trim();
+                    int quantity = Integer.parseInt(thneedInfo.substring(thneedInfo.lastIndexOf("(") + 1, thneedInfo.lastIndexOf(")")).trim());
+                    String[] thneedParts = thneedInfo.split(" ", 3);
+                    String size = thneedParts[0].trim();
+                    String color = thneedParts[1].trim();
+
+                    // Group by size
+                    inventoryByCategory.putIfAbsent(size, new HashMap<>());
+                    Map<String, Integer> sizeMap = inventoryByCategory.get(size);
+                    sizeMap.put(color, sizeMap.getOrDefault(color, 0) + quantity);
+                }
+            }
+
+            // Display the inventory in the TextArea
+            for (Entry<String, Map<String, Integer>> sizeEntry : inventoryByCategory.entrySet()) {
+                String size = sizeEntry.getKey();
+                Map<String, Integer> colorMap = sizeEntry.getValue();
+
+                for (Entry<String, Integer> colorEntry : colorMap.entrySet()) {
+                    String color = colorEntry.getKey();
+                    int totalQuantity = colorEntry.getValue();
+
+                    String itemInfo = size + " " + color + ": " + totalQuantity + " items\n";
+                    currentInventoryTextArea.appendText(itemInfo);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error reading file: " + e.getMessage());
         }
     }
 
-    private void updateIncomingShipmentTextArea() {
-        incomingShipmentTextArea.clear();
 
+    public void updateIncomingShipmentTextArea() {
         for (Shipment shipment : inventory.getIncomingShipments()) {
             incomingShipmentTextArea.appendText(shipment.toString() + "\n");
         }
@@ -83,7 +140,6 @@ public class InventoryViewController implements Initializable {
         inventory.updateInventory(shipment);
 
         updateCurrentInventoryTextArea();
-        updateIncomingShipmentTextArea();
     }
 
     @FXML
