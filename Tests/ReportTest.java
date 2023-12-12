@@ -36,4 +36,5 @@ class ReportTest {
         String result = report.topCustomerReport();
         assertNotNull(result, "topCustomerReport should not return null");
     }
+    
 }
