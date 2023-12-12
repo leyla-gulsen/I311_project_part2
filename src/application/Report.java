@@ -84,10 +84,32 @@ public class Report {
     }
     
     
-//	
-//	public void leastPopularReport(List<order> orders) {
-//		
-//	}
+    public String leastPopularReport() {
+        List<Order> orders = getOrdersList(); 
+        Map<String, Integer> colorCount = new HashMap<>();
+        int minCount = Integer.MAX_VALUE;
+        String leastPopularColor = "All colors equally popular";
+
+        for (Order order : orders) {
+            HashMap<Thneed, Integer> thneedMap = order.getThneedList(); 
+
+            for (Map.Entry<Thneed, Integer> entry : thneedMap.entrySet()) {
+                Thneed thneed = entry.getKey();
+                int quantity = entry.getValue();
+                String color = thneed.getColor();
+
+                int count = colorCount.getOrDefault(color, 0) + quantity;
+                colorCount.put(color, count);
+
+                if (colorCount.size() > 1 && count < minCount) {
+                    minCount = count;
+                    leastPopularColor = color;
+                }
+            }
+        }
+
+        return leastPopularColor;
+    }
 //	
 //	public void topCustomerReport() {
 //
