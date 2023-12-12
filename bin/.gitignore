@@ -1,1 +1,6 @@
 /application/
+<<<<<<< HEAD
+=======
+/Shipment.fxml
+/ShipmentController.class
+>>>>>>> refs/heads/master

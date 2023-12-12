@@ -42,4 +42,9 @@ public class ReportViewController {
         String mostPopularThneed = report.getMostPopularThneed();
         mostPopularField.setText(mostPopularThneed);
     }
+
+	public void setInventory(Inventory inventory) {
+		// TODO Auto-generated method stub
+		
+	}
 }
