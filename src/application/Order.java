@@ -35,6 +35,7 @@ public class Order implements Serializable {
 		this.customer = customer;
 		this.dateOrdered = new Date();
 		this.dateProjected = new Date();
+		this.dateProjected = new Date();
 	}
 	
 	/** Getters and Setters **/

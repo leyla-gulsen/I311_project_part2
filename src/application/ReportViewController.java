@@ -61,4 +61,5 @@ public class ReportViewController {
         String topCustomer = report.topCustomerReport();
         topCustomerField.setText(topCustomer);
     }
+    
 }
