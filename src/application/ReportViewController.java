@@ -33,18 +33,24 @@ public class ReportViewController {
     }
 	
 	// method to generate report
-    public void generateReport(List<Order> orders) {
-        // new instance
-        Report report = new Report();
-
-        // calling the popularReport method to get the most popular Thneed type
-        report.popularReport(orders);
-        String mostPopularThneed = report.getMostPopularThneed();
-        mostPopularField.setText(mostPopularThneed);
-    }
+//    public void generateReport(List<Order> orders) {
+//        // new instance
+//        Report report = new Report();
+//
+//        // calling the popularReport method to get the most popular Thneed type
+//        report.popularReport(orders);
+//        String mostPopularThneed = report.getMostPopularThneed();
+//        mostPopularField.setText(mostPopularThneed);
+//    }
 
 	public void setInventory(Inventory inventory) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void updateOrdersFilledReport() {
+	    Report report = new Report();
+	    String fastestFulfillmentTime = report.ordersFilledReport();
+	    orderFilledField.setText(fastestFulfillmentTime);
 	}
 }

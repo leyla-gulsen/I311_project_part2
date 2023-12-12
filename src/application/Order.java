@@ -1,6 +1,7 @@
 package application;
 
 import java.io.Serializable;
+import java.util.concurrent.TimeUnit;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -85,4 +86,25 @@ public class Order implements Serializable {
 			size += i;
 		return String.format("Order #%03d: " + customer.getName() + " (" + size + " thneeds)", orderNumber);
 	}
+	
+	public boolean isFulfilled() {
+		return dateFilled != null;
+	}
+
+    public String getFulfillmentTime() {
+        if (isFulfilled()) {
+            long diffInMillies = Math.abs(dateFilled.getTime() - dateOrdered.getTime());
+
+            // Calculate the differences in days, hours, minutes, and seconds
+            long days = TimeUnit.MILLISECONDS.toDays(diffInMillies);
+            long hours = TimeUnit.MILLISECONDS.toHours(diffInMillies) % 24;
+            long minutes = TimeUnit.MILLISECONDS.toMinutes(diffInMillies) % 60;
+            long seconds = TimeUnit.MILLISECONDS.toSeconds(diffInMillies) % 60;
+
+            // Format the string
+            return String.format("%d Days, %d Hours, %d Minutes, %d Seconds", days, hours, minutes, seconds);
+        } else {
+            return "Order not fulfilled";
+        }
+    }
 }

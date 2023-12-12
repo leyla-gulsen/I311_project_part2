@@ -154,8 +154,10 @@ public class InventoryViewController implements Initializable {
             dialogStage.setScene(dialogScene);
             ReportViewController dialogController = loader.getController();
             dialogController.setInventory(inventory);
+           
             dialogStage.show();
 
+            dialogController.updateOrdersFilledReport();
         } catch (IOException e) {
             e.printStackTrace();
         }

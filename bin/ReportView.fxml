@@ -7,15 +7,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="447.0" prefWidth="580.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="application.ReportViewController">
+<AnchorPane prefHeight="447.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ReportViewController">
    <children>
       <Label layoutX="163.0" layoutY="14.0" text="Thneed Business Report" textFill="#141cff">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="33.0" layoutY="66.0" text="Filled Time:">
+      <Label layoutX="33.0" layoutY="66.0" text="Quickest Filled Time:">
          <font>
             <Font size="18.0" />
          </font>
@@ -41,7 +40,7 @@
          </font>
       </Label>
       <ListView fx:id="backorderListView" layoutX="200.0" layoutY="288.0" prefHeight="145.0" prefWidth="340.0" />
-      <TextField fx:id="orderFilledField" layoutX="200.0" layoutY="67.0" />
+      <TextField fx:id="orderFilledField" layoutX="200.0" layoutY="67.0" prefHeight="25.0" prefWidth="291.0" />
       <TextField fx:id="mostPopularField" layoutX="200.0" layoutY="113.0" />
       <TextField fx:id="leastPopularField" layoutX="200.0" layoutY="163.0" />
       <TextField fx:id="topCustomerField" layoutX="200.0" layoutY="225.0" />
