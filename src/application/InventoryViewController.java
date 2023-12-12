@@ -14,6 +14,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -21,7 +25,13 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 
+
+
+import javafx.scene.control.ListView;
+
+
 public class InventoryViewController implements Initializable {
+
 
     @FXML
     private Button deliveryUpdateButton;
@@ -121,12 +131,12 @@ public class InventoryViewController implements Initializable {
     }
 
 
+
     public void updateIncomingShipmentTextArea() {
         for (Shipment shipment : inventory.getIncomingShipments()) {
             incomingShipmentTextArea.appendText(shipment.toString() + "\n");
         }
     }
-
     @FXML
     public void deliveryUpdateButtonClick(ActionEvent event) {
         String itemName = deliveryDateField.getText();
@@ -154,8 +164,13 @@ public class InventoryViewController implements Initializable {
             dialogStage.setScene(dialogScene);
             ReportViewController dialogController = loader.getController();
             dialogController.setInventory(inventory);
+           
             dialogStage.show();
 
+            dialogController.updateOrdersFilledReport();
+            dialogController.updateMostPopularThneed();
+            dialogController.updateLeastPopularThneed();
+            dialogController.updateTopCustomerReport();
         } catch (IOException e) {
             e.printStackTrace();
         }
