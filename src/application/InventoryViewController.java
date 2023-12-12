@@ -58,9 +58,6 @@ public class InventoryViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-    public InventoryViewController() {
-
         this.inventory = new Inventory();
         this.inventory.initialize();
         inventory.loadInventory();
@@ -132,6 +129,8 @@ public class InventoryViewController implements Initializable {
             System.err.println("Error reading file: " + e.getMessage());
         }
     }
+
+
 
     public void updateIncomingShipmentTextArea() {
         for (Shipment shipment : inventory.getIncomingShipments()) {
