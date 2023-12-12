@@ -55,4 +55,10 @@ public class ReportViewController {
         String leastPopularThneed = report.leastPopularReport();
         leastPopularField.setText(leastPopularThneed);
     }
+    
+    public void updateTopCustomerReport() {
+        Report report = new Report();
+        String topCustomer = report.topCustomerReport();
+        topCustomerField.setText(topCustomer);
+    }
 }

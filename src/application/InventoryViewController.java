@@ -160,6 +160,7 @@ public class InventoryViewController implements Initializable {
             dialogController.updateOrdersFilledReport();
             dialogController.updateMostPopularThneed();
             dialogController.updateLeastPopularThneed();
+            dialogController.updateTopCustomerReport();
         } catch (IOException e) {
             e.printStackTrace();
         }

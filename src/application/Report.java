@@ -110,10 +110,28 @@ public class Report {
 
         return leastPopularColor;
     }
-//	
-//	public void topCustomerReport() {
-//
-//	}
+
+    public String topCustomerReport() {
+        List<Order> orders = getOrdersList(); 
+        Map<Customer, Integer> customerOrderCount = new HashMap<>();
+        int maxOrders = 0;
+        Customer topCustomer = null;
+
+        for (Order order : orders) {
+            Customer customer = order.getCustomer(); 
+            int count = customerOrderCount.getOrDefault(customer, 0) + 1;
+            customerOrderCount.put(customer, count);
+
+            if (count > maxOrders) {
+                maxOrders = count;
+                topCustomer = customer;
+            }
+        }
+
+        return topCustomer != null ? topCustomer.getName() : "No orders placed";
+    }
+    
+    
 //	
 //	public void backorderedItemsReport(List<order> orders) {
 //		
