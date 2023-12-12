@@ -1,6 +1,7 @@
 package application;
 
 import java.io.FileInputStream;
+
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,48 +56,34 @@ public class Report {
 	 * Most Popular Thneed
 	 */
 	
-//	private String mostPopularThneed;
-//	
-//	public void popularReport(List<Order> orders) {
-//        HashMap<String, Integer> thneedOccurrences = new HashMap<>();
-//
-//        // iterate through each order and count thneed occurrences
-//        for (Order order : orders) {
-//            for (Map.Entry<Thneed, Integer> entry : order.getThneedList().entrySet()) {
-//                Thneed thneed = entry.getKey();
-//                String thneedType = thneed.getSize() + " " + thneed.getColor() + " thneed";
-//
-//                // increment
-//                thneedOccurrences.put(thneedType, thneedOccurrences.getOrDefault(thneedType, 0) + entry.getValue());
-//            }
-//        }
-//
-//        // find the most popular thneed type
-//        String mostPopularThneed = null;
-//        int maxOccurrences = 0;
-//
-//        for (Map.Entry<String, Integer> entry : thneedOccurrences.entrySet()) {
-//            if (entry.getValue() > maxOccurrences) {
-//                mostPopularThneed = entry.getKey();
-//                maxOccurrences = entry.getValue();
-//            }
-//        }
-//
-//        // display the most popular thneed type
-//        if (mostPopularThneed != null) {
-//            this.mostPopularThneed = mostPopularThneed;
-//        } else {
-//            this.mostPopularThneed = "No orders placed yet.";
-//        }
-//    }
-//	
-//    public String getMostPopularThneed() {
-//        return mostPopularThneed;
-//    }
-//    
-//    /*
-//     * 
-//     */
+    public String mostPopularThneed() {
+        List<Order> orders = getOrdersList(); 
+        Map<String, Integer> colorCount = new HashMap<>();
+        int maxCount = 0;
+        String mostPopularColor = "No duplicate colors ordered";
+
+        for (Order order : orders) {
+            HashMap<Thneed, Integer> thneedMap = order.getThneedList(); 
+
+            for (Map.Entry<Thneed, Integer> entry : thneedMap.entrySet()) {
+                Thneed thneed = entry.getKey();
+                int quantity = entry.getValue();
+                String color = thneed.getColor();
+
+                int count = colorCount.getOrDefault(color, 0) + quantity;
+                colorCount.put(color, count);
+
+                if (count > maxCount) {
+                    maxCount = count;
+                    mostPopularColor = color;
+                }
+            }
+        }
+
+        return (maxCount > 1) ? mostPopularColor : "No duplicate colors ordered";
+    }
+    
+    
 //	
 //	public void leastPopularReport(List<order> orders) {
 //		
