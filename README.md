@@ -2,7 +2,7 @@
 
 **Course**: INFO-I 311, Application Development, Fall 2023 <br>
 **Institution**: Indiana University <br>
-**Final Product**: See [Screenshots of Final Product](#screenshots-of-final-product) at the bottom of this page.
+**Final Product**: See [Screenshots of Final Product](#screenshots-of-final-product) at the bottom of this page. To see the entire flow of the final product with all screenshots, please visit the [Final Product](https://github.com/leyla-gulsen/I311_project_part2/wiki/Final-Product) section of the project wiki.
 > Imported from my IU enterprise account github.iu.edu/lsgulsen
 
 ## Project Overview
@@ -84,3 +84,24 @@ Professor J Duncan for teaching the course and creating a project that was a gre
 Assistants Andy Myers, Erika Becker, and Jeff Hochgesgang for guidance and insights.
 
 ## Screenshots of Final Product
+> To see the entire flow of the final product with all screenshots, please visit the [Final Product](https://github.com/leyla-gulsen/I311_project_part2/wiki/Final-Product) section of the project wiki.
+
+**Home Screen**
+
+![](https://github.com/leyla-gulsen/I311_project_part2/blob/master/images/thneed1.png)
+
+**Main Screen after registering or logging in**
+
+![](https://github.com/leyla-gulsen/I311_project_part2/blob/master/images/thneed2.png)
+
+**Place New Order Screen**
+
+![](https://github.com/leyla-gulsen/I311_project_part2/blob/master/images/thneed3.png)
+
+**Warehouse Inventory Screen**
+
+![](https://github.com/leyla-gulsen/I311_project_part2/blob/master/images/thneed13.png)
+
+**Thneed Business Report Screen**
+
+![](https://github.com/leyla-gulsen/I311_project_part2/blob/master/images/thneed17.png)
